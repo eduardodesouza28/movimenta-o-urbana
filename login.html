@@ -1,27 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login | Carona</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
     
-    
-    <form action="/login" method="POST">
-        <h1>Login</h1>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
-
-        <button type="submit">Entrar</button>
+    <div class="max-w-md w-full space-y-8 p-8">
+        <div class="text-center">
+            <i class="fas fa-car text-blue-600 text-4xl mb-4"></i>
+            <h2 class="text-3xl font-bold text-gray-900">Carona Ou Viajem ¿</h2>
+            <p class="mt-2 text-sm text-gray-600">Entre na sua conta</p>
+        </div>
         
-        <a href="criarConta.html">Não Tem conta? Crie uma clicando aqui</a>
-        <a href="recuperarSenha.html">Esqueci minha senha</a>
-    </form>
-    
+        <form id="loginForm" class="mt-8 space-y-6 bg-white p-6 rounded-lg shadow-md">
+            <h1 class="text-xl font-bold text-center text-gray-800">Login</h1>
+            
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">
+                    <i class="fas fa-envelope mr-1"></i>
+                    Email:
+                </label>
+                <input type="email" id="email" name="email" required
+                       class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+
+            <div>
+                <label for="senha" class="block text-sm font-medium text-gray-700">
+                    <i class="fas fa-lock mr-1"></i>
+                    Senha:
+                </label>
+                <input type="password" id="senha" name="senha" required
+                       class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+
+            <button type="submit" 
+                    class="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-300">
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                Entrar
+            </button>
+            
+            <div class="text-center space-y-2">
+                <a href="criarConta.html" class="block text-sm text-blue-600 hover:text-blue-800 transition duration-300">
+                    Não tem conta? Crie uma clicando aqui
+                </a>
+                <a href="recuperarSenha.html" class="block text-sm text-blue-600 hover:text-blue-800 transition duration-300">
+                    Esqueci minha senha
+                </a>
+                <a href="index.html" class="block text-sm text-gray-600 hover:text-gray-800 transition duration-300">
+                    <i class="fas fa-arrow-left mr-1"></i>
+                    Voltar ao início
+                </a>
+            </div>
+        </form>
+        
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
+

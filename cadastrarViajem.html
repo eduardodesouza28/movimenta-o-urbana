@@ -1,31 +1,295 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar / Disponível</title>
+    <title>Cadastrar Viagem | Carona</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
-<body>
-    <form action="/cadastrar-viajem" method="POST">
-        <h1>Cadastrar Viagem</h1>
+<body class="bg-gray-50">
 
-        <label for="origem">Origem:</label>
-        <input type="text" id="origem" name="origem" required>
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-car text-blue-600 text-2xl mr-2"></i>
+                <h1 class="text-xl font-bold text-blue-600">Carona Ou Viajem ¿</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="px-4 py-2 text-blue-600 font-medium rounded-full hover:bg-blue-50 transition duration-300">Início</a>
+                <button id="logoutBtn" class="px-6 py-2 bg-red-600 text-white font-medium rounded-full hover:bg-red-700 transition duration-300">Sair</button>
+            </div>
+        </div>
+    </header>
 
-        <label for="destino">Destino:</label>
-        <input type="text" id="destino" name="destino" required>
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-plus-circle text-blue-600 mr-2"></i>
+                Cadastrar Nova Viagem
+            </h2>
+            
+            <form id="viagemForm" class="max-w-2xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="origem" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-map-marker-alt text-green-600 mr-1"></i>
+                            Origem
+                        </label>
+                        <input type="text" id="origem" name="origem" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Ex: São Paulo, SP">
+                    </div>
+                    
+                    <div>
+                        <label for="destino" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-map-marker-alt text-red-600 mr-1"></i>
+                            Destino
+                        </label>
+                        <input type="text" id="destino" name="destino" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Ex: Rio de Janeiro, RJ">
+                    </div>
+                    
+                    <div>
+                        <label for="data" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-calendar text-blue-600 mr-1"></i>
+                            Data da Viagem
+                        </label>
+                        <input type="date" id="data" name="data" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="horario" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-clock text-purple-600 mr-1"></i>
+                            Horário de Saída
+                        </label>
+                        <input type="time" id="horario" name="horario" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="vagas" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-users text-orange-600 mr-1"></i>
+                            Número de Vagas
+                        </label>
+                        <input type="number" id="vagas" name="vagas" min="1" max="8" required
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Ex: 3">
+                    </div>
+                    
+                    <div>
+                        <label for="preco" class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-money-bill-wave text-green-600 mr-1"></i>
+                            Preço por Pessoa (R$)
+                        </label>
+                        <input type="number" id="preco" name="preco" min="0" step="0.01"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Ex: 50.00">
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <label for="descricao" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-comment text-gray-600 mr-1"></i>
+                        Descrição (Opcional)
+                    </label>
+                    <textarea id="descricao" name="descricao" rows="3"
+                              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="Informações adicionais sobre a viagem..."></textarea>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <button type="submit" 
+                            class="px-8 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                        <i class="fas fa-save mr-2"></i>
+                        Cadastrar Viagem
+                    </button>
+                </div>
+            </form>
+        </div>
 
-        <label for="data">Data da Viagem:</label>
-        <input type="date" id="data" name="data" required>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-list text-green-600 mr-2"></i>
+                Viagens Disponíveis
+            </h2>
+            
+            <div id="viagensContainer" class="space-y-4">
+                <div class="text-center py-8">
+                    <i class="fas fa-spinner fa-spin text-blue-600 text-2xl mb-2"></i>
+                    <p class="text-gray-600">Carregando viagens...</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <label for="horario">Horário de Saída:</label>
-        <input type="time" id="horario" name="horario" required>
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+            <div class="text-center">
+                <i class="fas fa-check-circle text-green-600 text-4xl mb-4"></i>
+                <h3 class="text-lg font-bold text-gray-800 mb-2">Sucesso!</h3>
+                <p class="text-gray-600 mb-4">Viagem cadastrada com sucesso!</p>
+                <button onclick="closeModal()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
 
-        <label for="vagas">Número de Vagas:</label>
-        <input type="number" id="vagas" name="vagas" min="1" required>
+    <script>
+        const API_BASE_URL = 'http://localhost:3000';
 
-        <button type="submit">Cadastrar Viagem</button>
-    </form>
-    
+        function verificarLogin() {
+            const usuario = localStorage.getItem('usuario');
+            if (!usuario) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('usuario');
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('viagemForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const viagemData = {
+                origem: formData.get('origem'),
+                destino: formData.get('destino'),
+                data: formData.get('data'),
+                horario: formData.get('horario'),
+                vagas: parseInt(formData.get('vagas')),
+                preco: parseFloat(formData.get('preco')) || 0,
+                descricao: formData.get('descricao'),
+                usuario_id: JSON.parse(localStorage.getItem('usuario')).id
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/cadastrar-viagem`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(viagemData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('successModal').classList.remove('hidden');
+                    document.getElementById('successModal').classList.add('flex');
+                    this.reset();
+                    carregarViagens();
+                } else {
+                    alert('Erro ao cadastrar viagem: ' + result.error);
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao conectar com o servidor');
+            }
+        });
+
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+            document.getElementById('successModal').classList.remove('flex');
+        }
+
+        async function carregarViagens() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/viagens`);
+                const result = await response.json();
+
+                const container = document.getElementById('viagensContainer');
+
+                if (result.success && result.viagens.length > 0) {
+                    container.innerHTML = result.viagens.map(viagem => `
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition duration-300">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-route text-blue-600 mr-2"></i>
+                                        <span class="font-semibold text-lg">
+                                            ${viagem.origem} → ${viagem.destino}
+                                        </span>
+                                    </div>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-gray-600">
+                                        <div>
+                                            <i class="fas fa-calendar mr-1"></i>
+                                            ${new Date(viagem.data_viagem).toLocaleDateString('pt-BR')}
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-clock mr-1"></i>
+                                            ${viagem.horario_saida}
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-users mr-1"></i>
+                                            ${viagem.vagas_disponiveis} vagas
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-money-bill-wave mr-1"></i>
+                                            R$ ${parseFloat(viagem.preco).toFixed(2)}
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <span class="text-sm text-gray-500">
+                                            <i class="fas fa-user mr-1"></i>
+                                            Motorista: ${viagem.motorista_nome}
+                                        </span>
+                                    </div>
+                                    ${viagem.descricao ? `
+                                        <div class="mt-2 text-sm text-gray-600">
+                                            <i class="fas fa-comment mr-1"></i>
+                                            ${viagem.descricao}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                                <div class="mt-4 md:mt-0 md:ml-4">
+                                    <button class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-300">
+                                        <i class="fas fa-hand-paper mr-1"></i>
+                                        Solicitar Vaga
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = `
+                        <div class="text-center py-8">
+                            <i class="fas fa-car text-gray-400 text-4xl mb-4"></i>
+                            <p class="text-gray-600">Nenhuma viagem disponível no momento.</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Erro ao carregar viagens:', error);
+                document.getElementById('viagensContainer').innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-exclamation-triangle text-red-500 text-4xl mb-4"></i>
+                        <p class="text-red-600">Erro ao carregar viagens. Verifique sua conexão.</p>
+                    </div>
+                `;
+            }
+        }
+
+        if (verificarLogin()) {
+            carregarViagens();
+        }
+
+        document.getElementById('data').min = new Date().toISOString().split('T')[0];
+    </script>
 </body>
 </html>
+
